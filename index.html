@@ -781,6 +781,88 @@
   .copy-fallback{ width:100%; height:220px; margin-top:10px; font-size:12px!important; }
 
   /* Printing gives a clean paper list rather than a screenshot of the app */
+  /* =========================================================================
+     ==  SKIN XVI  —  THE WASTELAND  =========================================
+     Paper is what the CALENDAR is made of in this world, not what the world
+     is made of, so everything below excludes #screen-quest: the calendar
+     stays a scorched sheet on a workbench and the rest of the app becomes
+     the workbench. Salvage, not decoration — sheet steel that has been
+     outside, green light off a lamp nobody replaced, hazard paint, rust.
+     ========================================================================= */
+  body[data-material="salvage"]{
+    --wl-toxic:#b6e027;
+    --wl-hazard:#e3b23c;
+    --wl-rust:#8a4526;
+    /* coarse blotching for corrosion, stretched so it runs downward */
+    --wl-grime:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.02 .045' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  /* -- salvaged sheet metal, everywhere the calendar is not --------------- */
+  body[data-material="salvage"] .screen:not(#screen-quest) .panel{
+    border-color:#3d4a25;
+    border-radius:3px;
+    background:
+      linear-gradient(180deg, rgba(182,224,39,.05), transparent 26%),
+      radial-gradient(ellipse 42% 30% at 88% 6%, rgba(138,69,38,.17), transparent 70%),
+      radial-gradient(ellipse 38% 26% at 6% 94%, rgba(138,69,38,.13), transparent 72%),
+      linear-gradient(180deg, var(--panel), var(--panel-2));
+    box-shadow:
+      inset 0 1px 0 rgba(182,224,39,.1),
+      inset 0 -2px 0 rgba(0,0,0,.5),
+      0 2px 3px rgba(0,0,0,.6),
+      0 12px 26px rgba(0,0,0,.5);
+  }
+  /* the accent rule along the top of a panel becomes taped hazard paint */
+  body[data-material="salvage"] .screen:not(#screen-quest) .panel::before{
+    height:3px; opacity:.8;
+    background:repeating-linear-gradient(115deg,
+      var(--wl-hazard) 0 7px, #17200e 7px 14px);
+  }
+
+  /* Corrosion. dressPanels() has already hung these two layers on every
+     panel in the app; outside the calendar they do a different job. */
+  body[data-material="salvage"] .screen:not(#screen-quest) .panel > .paper-fx{
+    display:block; position:absolute; inset:0;
+    pointer-events:none; z-index:4;
+    background-image:var(--wl-grime);
+    background-size:220px 220px;
+    mix-blend-mode:soft-light;
+    opacity:.45;
+  }
+  /* rust creeping in from the edges, and two rivets holding the plate on */
+  body[data-material="salvage"] .screen:not(#screen-quest) .panel > .paper-edge{
+    display:block; position:absolute; inset:0;
+    pointer-events:none; z-index:5;
+    box-shadow:
+      inset 0 0 22px rgba(138,69,38,.2),
+      inset 0 0 0 1px rgba(0,0,0,.35);
+    background:
+      radial-gradient(circle 2.5px at 11px 12px,
+        #7a8659 0 40%, #2a3318 42% 70%, transparent 72%),
+      radial-gradient(circle 2.5px at calc(100% - 11px) 12px,
+        #7a8659 0 40%, #2a3318 42% 70%, transparent 72%);
+  }
+
+  /* -- readouts read like a terminal that survived ----------------------- */
+  body[data-material="salvage"] .screen:not(#screen-quest) .stat-val{
+    color:var(--wl-toxic);
+    text-shadow:0 0 10px rgba(182,224,39,.32);
+  }
+  body[data-material="salvage"] .screen:not(#screen-quest) .kv{
+    border-color:rgba(182,224,39,.16);
+  }
+  body[data-material="salvage"] .screen:not(#screen-quest) .chip{
+    border-radius:2px;
+  }
+
+  /* -- the chrome above and below the app -------------------------------- */
+  body[data-material="salvage"] .tab-bar{
+    border-top-color:#36421f;
+    box-shadow:inset 0 1px 0 rgba(182,224,39,.12);
+  }
+  body[data-material="salvage"] .tab.active .lbl,
+  body[data-material="salvage"] .tab.active .ico{ color:var(--wl-toxic); }
+
   @media print{
     body{ background:#fff!important; color:#000!important; }
     .screen{ display:none!important; }
@@ -2592,7 +2674,8 @@
     --pp-rule:rgba(45,42,32,.34); --pp-stain:rgba(110,88,48,.17); --pp-seal:#b03a24;
   }
 
-  body[data-material="paper"] #screen-quest .panel{
+  body[data-material="paper"] #screen-quest .panel,
+  body[data-material="salvage"] #screen-quest .panel{
     color:var(--pp-ink);
     border:1px solid rgba(0,0,0,.32);
     /* deliberately uneven, so the sheet has a torn rather than cut edge */
@@ -2608,86 +2691,122 @@
       0 3px 10px rgba(0,0,0,.5);
   }
   body[data-material="paper"] #screen-quest .panel::before,
-  body[data-material="paper"] #screen-quest .panel::after{ display:none; }
+  body[data-material="salvage"] #screen-quest .panel::before,
+  body[data-material="paper"] #screen-quest .panel::after,
+  body[data-material="salvage"] #screen-quest .panel::after{ display:none; }
 
   /* Everything written on the sheet is written in ink */
   body[data-material="paper"] #screen-quest .cal-title,
+  body[data-material="salvage"] #screen-quest .cal-title,
   body[data-material="paper"] #screen-quest .cal-num,
+  body[data-material="salvage"] #screen-quest .cal-num,
   body[data-material="paper"] #screen-quest .eaten-title,
+  body[data-material="salvage"] #screen-quest .eaten-title,
   body[data-material="paper"] #screen-quest .eaten-total,
+  body[data-material="salvage"] #screen-quest .eaten-total,
   body[data-material="paper"] #screen-quest .kv,
+  body[data-material="salvage"] #screen-quest .kv,
   body[data-material="paper"] #screen-quest .kv span,
+  body[data-material="salvage"] #screen-quest .kv span,
   body[data-material="paper"] #screen-quest .jname,
+  body[data-material="salvage"] #screen-quest .jname,
   body[data-material="paper"] #screen-quest .jkcal,
+  body[data-material="salvage"] #screen-quest .jkcal,
   body[data-material="paper"] #screen-quest .nutri-group,
-  body[data-material="paper"] #screen-quest .covers-label{
+  body[data-material="salvage"] #screen-quest .nutri-group,
+  body[data-material="paper"] #screen-quest .covers-label,
+  body[data-material="salvage"] #screen-quest .covers-label{
     color:var(--pp-ink);
   }
   body[data-material="paper"] #screen-quest .cal-dow,
+  body[data-material="salvage"] #screen-quest .cal-dow,
   body[data-material="paper"] #screen-quest .cal-kcal,
+  body[data-material="salvage"] #screen-quest .cal-kcal,
   body[data-material="paper"] #screen-quest .fav-nores,
+  body[data-material="salvage"] #screen-quest .fav-nores,
   body[data-material="paper"] #screen-quest .cal-legend span,
-  body[data-material="paper"] #screen-quest #calNote{ color:var(--pp-soft); }
-  body[data-material="paper"] #screen-quest #calNote strong{ color:var(--pp-ink)!important; }
+  body[data-material="salvage"] #screen-quest .cal-legend span,
+  body[data-material="paper"] #screen-quest #calNote,
+  body[data-material="salvage"] #screen-quest #calNote{ color:var(--pp-soft); }
+  body[data-material="paper"] #screen-quest #calNote strong,
+  body[data-material="salvage"] #screen-quest #calNote strong{ color:var(--pp-ink)!important; }
 
   /* The grid is ruled onto the page, not built out of boxes */
-  body[data-material="paper"] .cal-grid{
+  body[data-material="paper"] .cal-grid,
+  body[data-material="salvage"] .cal-grid{
     gap:0; margin-top:12px;
     border-top:1px solid var(--pp-rule);
     border-left:1px solid var(--pp-rule);
   }
-  body[data-material="paper"] .cal-dow{
+  body[data-material="paper"] .cal-dow,
+  body[data-material="salvage"] .cal-dow{
     padding:5px 0; border-right:1px solid var(--pp-rule);
     border-bottom:1px solid var(--pp-rule);
     letter-spacing:2px;
   }
-  body[data-material="paper"] .cal-cell{
+  body[data-material="paper"] .cal-cell,
+  body[data-material="salvage"] .cal-cell{
     border-radius:0; background:transparent;
     box-shadow:none;
     border-right:1px solid var(--pp-rule);
     border-bottom:1px solid var(--pp-rule);
   }
-  body[data-material="paper"] .cal-cell.blank{ background:rgba(0,0,0,.05); }
-  body[data-material="paper"] .cal-cell.future{ opacity:.45; }
-  body[data-material="paper"] .cal-cell.today{
+  body[data-material="paper"] .cal-cell.blank,
+  body[data-material="salvage"] .cal-cell.blank{ background:rgba(0,0,0,.05); }
+  body[data-material="paper"] .cal-cell.future,
+  body[data-material="salvage"] .cal-cell.future{ opacity:.45; }
+  body[data-material="paper"] .cal-cell.today,
+  body[data-material="salvage"] .cal-cell.today{
     background:rgba(0,0,0,.05); color:var(--pp-ink);
     box-shadow:inset 0 0 0 2px var(--pp-seal);
   }
-  body[data-material="paper"] .cal-cell.sel{
+  body[data-material="paper"] .cal-cell.sel,
+  body[data-material="salvage"] .cal-cell.sel{
     background:rgba(0,0,0,.11);
     box-shadow:inset 0 0 0 2px var(--pp-ink);
   }
   /* Ink underscore rather than a coloured bar */
-  body[data-material="paper"] .cal-mark{
+  body[data-material="paper"] .cal-mark,
+  body[data-material="salvage"] .cal-mark{
     height:2px; border-radius:0; background:var(--pp-ink);
   }
-  body[data-material="paper"] .cal-legend i{ background:var(--pp-ink); height:2px; }
-  body[data-material="paper"] .cal-title{
+  body[data-material="paper"] .cal-legend i,
+  body[data-material="salvage"] .cal-legend i{ background:var(--pp-ink); height:2px; }
+  body[data-material="paper"] .cal-title,
+  body[data-material="salvage"] .cal-title{
     background:transparent; box-shadow:none; padding:7px 4px;
     letter-spacing:3px; text-transform:uppercase;
   }
-  body[data-material="paper"] .cal-head .mini-btn{
+  body[data-material="paper"] .cal-head .mini-btn,
+  body[data-material="salvage"] .cal-head .mini-btn{
     background:transparent; border:1px solid var(--pp-rule);
     color:var(--pp-ink); box-shadow:none;
   }
   body[data-material="paper"] #screen-quest .mini-btn,
-  body[data-material="paper"] #screen-quest .btn-ghost{
+  body[data-material="salvage"] #screen-quest .mini-btn,
+  body[data-material="paper"] #screen-quest .btn-ghost,
+  body[data-material="salvage"] #screen-quest .btn-ghost{
     background:rgba(0,0,0,.06); border:1px solid var(--pp-rule);
     color:var(--pp-ink); box-shadow:none;
   }
-  body[data-material="paper"] #screen-quest select{
+  body[data-material="paper"] #screen-quest select,
+  body[data-material="salvage"] #screen-quest select{
     background-color:rgba(0,0,0,.06); border-color:var(--pp-rule);
     color:var(--pp-ink);
   }
   body[data-material="paper"] #screen-quest .jrow,
-  body[data-material="paper"] #screen-quest .kv{
+  body[data-material="salvage"] #screen-quest .jrow,
+  body[data-material="paper"] #screen-quest .kv,
+  body[data-material="salvage"] #screen-quest .kv{
     border-bottom-color:var(--pp-rule);
   }
-  body[data-material="paper"] #screen-quest .panel > .eaten-head:first-child{
+  body[data-material="paper"] #screen-quest .panel > .eaten-head:first-child,
+  body[data-material="salvage"] #screen-quest .panel > .eaten-head:first-child{
     background:rgba(0,0,0,.07);
     border-bottom:1px solid var(--pp-rule);
   }
-  body[data-material="paper"] #screen-quest .panel > .eaten-head:first-child::before{
+  body[data-material="paper"] #screen-quest .panel > .eaten-head:first-child::before,
+  body[data-material="salvage"] #screen-quest .panel > .eaten-head:first-child::before{
     background:var(--pp-seal);
   }
 
@@ -2965,7 +3084,8 @@
   /* The view switch stayed a dark rounded form control on every material —
      a hole punched in parchment, a rounded chip on a pixel grid. It takes
      the material like everything else on the page. */
-  body[data-material="paper"] #screen-quest select{
+  body[data-material="paper"] #screen-quest select,
+  body[data-material="salvage"] #screen-quest select{
     background-color:rgba(0,0,0,.07)!important;
     border:1px solid var(--pp-rule)!important;
     color:var(--pp-ink)!important;
@@ -3042,23 +3162,28 @@
 
   .paper-fx, .paper-edge{ display:none; }
   body[data-material="paper"] #screen-quest .paper-fx,
-  body[data-material="paper"] #screen-quest .paper-edge{
+  body[data-material="salvage"] #screen-quest .paper-fx,
+  body[data-material="paper"] #screen-quest .paper-edge,
+  body[data-material="salvage"] #screen-quest .paper-edge{
     display:block; position:absolute; inset:0;
     pointer-events:none; z-index:5;
   }
   /* Grain multiplies over everything including the ink, which is what stops
      the type from looking printed onto glass. */
-  body[data-material="paper"] #screen-quest .paper-fx{
+  body[data-material="paper"] #screen-quest .paper-fx,
+  body[data-material="salvage"] #screen-quest .paper-fx{
     background-image:var(--pp-grain), var(--pp-fibre);
     background-size:180px 180px, 240px 240px;
     mix-blend-mode:multiply;
     opacity:.24;
   }
   /* The edge layer paints normally, so it can carry hardware and char */
-  body[data-material="paper"] #screen-quest .paper-edge{ mix-blend-mode:normal; }
+  body[data-material="paper"] #screen-quest .paper-edge,
+  body[data-material="salvage"] #screen-quest .paper-edge{ mix-blend-mode:normal; }
 
   /* The generic parchment box is retired — each sheet builds its own stock */
-  body[data-material="paper"] #screen-quest .panel{
+  body[data-material="paper"] #screen-quest .panel,
+  body[data-material="salvage"] #screen-quest .panel{
     border:0; border-radius:2px; box-shadow:none;
     background:linear-gradient(180deg, var(--pp-1), var(--pp-2));
   }
@@ -3214,7 +3339,9 @@
   /* A masked sheet clips its own outer shadow, so the lift is re-hung on the
      wrapper where the mask cannot reach it. */
   body[data-material="paper"] #screen-quest .cal-panel,
-  body[data-material="paper"] #screen-quest #calDayPanel .panel{
+  body[data-material="salvage"] #screen-quest .cal-panel,
+  body[data-material="paper"] #screen-quest #calDayPanel .panel,
+  body[data-material="salvage"] #screen-quest #calDayPanel .panel{
     isolation:isolate;
   }
 
@@ -3280,7 +3407,9 @@
      comes from the char and vignette that are painted anyway.
      ---------------------------------------------------------------------- */
   body[data-material="paper"] #screen-quest .cal-panel,
-  body[data-material="paper"] #screen-quest #calDayPanel .panel{
+  body[data-material="salvage"] #screen-quest .cal-panel,
+  body[data-material="paper"] #screen-quest #calDayPanel .panel,
+  body[data-material="salvage"] #screen-quest #calDayPanel .panel{
     filter:none;
   }
 
@@ -4447,15 +4576,17 @@
         rgba(220,200,200,.014) 7px 8px, transparent 8px 15px),
       linear-gradient(180deg, #241a1b, #0d0909);
   }
-  /* Poured concrete, blotched where it cured unevenly */
+  /* Concrete under a sodium lamp that has gone green, stained where the
+     water came through and rusted where the rebar did */
   body[data-theme="survival"]{
-    background-color:#16150f;
+    background-color:#0a0d08;
     background-image:
-      radial-gradient(110% 68% at 50% -8%, rgba(255,244,214,.05), transparent 58%),
-      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.62), transparent 64%),
-      radial-gradient(ellipse 30% 22% at 18% 26%, rgba(120,110,88,.10), transparent 70%),
-      radial-gradient(ellipse 26% 20% at 78% 62%, rgba(120,110,88,.08), transparent 70%),
-      linear-gradient(180deg, #2b2921, #131209);
+      radial-gradient(120% 70% at 50% -10%, rgba(182,224,39,.11), transparent 58%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.72), transparent 62%),
+      radial-gradient(ellipse 34% 24% at 16% 24%, rgba(120,150,60,.09), transparent 70%),
+      radial-gradient(ellipse 28% 20% at 82% 58%, rgba(150,86,40,.10), transparent 72%),
+      radial-gradient(ellipse 22% 16% at 62% 88%, rgba(150,86,40,.07), transparent 72%),
+      linear-gradient(180deg, #1b2413, #090c07);
   }
   /* A dark room with a floor grid and a little bounce off the screen */
   body[data-theme="cyberpunk"]{
@@ -6137,15 +6268,15 @@
     },
     survival: {
       tiers:["Scavenger", "Wanderer", "Scrapper", "Raider", "Juggernaut"],
-      wash:"radial-gradient(ellipse at top, #1d1a14 0%, #12100d 60%)",
+      wash:"radial-gradient(ellipse at top, #17210f 0%, #0a0d08 62%)",
       name:"Post-Apocalyptic", icon:"radiation",
-      blurb:"Rust, ration tins and a flickering terminal",
-      fonts:{ display:"'Special Elite', 'Courier New', monospace", body:"'Courier Prime', 'Courier New', monospace", scale:1.7, spacing:"1px" },
-      sizes:{ "fs-6":"9px", "fs-7":"10px", "fs-8":"11px", "fs-9":"11px", "fs-10":"12px", "fs-11":"13px", "fs-12":"14px", "fs-13":"15px", "fs-18":"23px", "fs-body":"12px" },
-      glow:"none", accentSoft:"rgba(143,201,58,.10)", accentLine:"rgba(143,201,58,.45)",
-      colors:{ "bg-0":"#12100d","bg-1":"#191712","panel":"#211e18","panel-2":"#1b1814","line":"#3a352a",
-               "cyan":"#8fc93a","green":"#a8c93a","amber":"#d99b28","red":"#c2502f","magenta":"#9c7b4a",
-               "text":"#e2dcc8","muted":"#a19a85" },
+      blurb:"Green haze, scavenged gear and something moving in the stairwell",
+      fonts:{ display:"'Special Elite', 'Courier New', monospace", body:"'Share Tech Mono', 'Courier New', monospace", scale:1.65, spacing:"0.8px" },
+      sizes:{ "fs-6":"9px", "fs-7":"10px", "fs-8":"11px", "fs-9":"12px", "fs-10":"13px", "fs-11":"14px", "fs-12":"15px", "fs-13":"16px", "fs-18":"24px", "fs-body":"13px" },
+      glow:"0 0 9px rgba(182,224,39,.3)", accentSoft:"rgba(182,224,39,.11)", accentLine:"rgba(182,224,39,.42)",
+      colors:{ "bg-0":"#0a0d08","bg-1":"#10150e","panel":"#161d13","panel-2":"#111710","line":"#36421f",
+               "cyan":"#b6e027","green":"#7fbf3f","amber":"#e3b23c","red":"#c4442a","magenta":"#94853f",
+               "text":"#e7efd6","muted":"#94a189" },
       sheet:"SURVIVOR PROFILE", sheetTitle:"Your Survivor",
       words:{ tier:"GRADE", loadout:"SUPPLY RUN", quest:"TASK", stat:"READOUT", inventory:"STASH",
               build:"Plan Your Supply Run", charCreate:"SURVIVOR PROFILE", hp:"RATIONS", playstyle:"APPROACH",
@@ -6254,7 +6385,7 @@
      horror page are the same construction in different hands. */
   const THEME_MATERIAL = {
     cyberpunk:'digital', arcade:'pixel',  craft:'pixel',   fantasy:'paper',
-    horror:'paper',      survival:'paper', fps:'steel',    outdoors:'ledger',
+    horror:'paper',      survival:'salvage', fps:'steel',  outdoors:'ledger',
     farm:'cozy',         racing:'race'
   };
 
