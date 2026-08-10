@@ -4000,6 +4000,960 @@
     box-shadow:inset 3px 0 0 var(--cyan);
   }
 
+
+  /* =========================================================================
+     ==  SKIN XII  —  MATERIALS EVERYWHERE  ==================================
+     The calendar keeps its own, more specific rules; everything here is for
+     the other nine screens.
+     ========================================================================= */
+  .screen:not(#screen-quest) .panel{ position:relative; }
+
+  /* -------------------------------------------------------------------------
+     PAPER — fantasy, horror, survival
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel{
+    color:var(--pp-ink);
+    border:1px solid rgba(0,0,0,.28);
+    /* uneven, so the sheet is torn rather than cut */
+    border-radius:9px 4px 11px 5px / 5px 11px 4px 10px;
+    background:
+      radial-gradient(ellipse 55% 38% at 18% 14%, var(--pp-stain), transparent 62%),
+      radial-gradient(ellipse 48% 32% at 82% 72%, var(--pp-stain), transparent 62%),
+      repeating-linear-gradient(92deg, rgba(0,0,0,.03) 0 1px, transparent 1px 3px),
+      linear-gradient(158deg, var(--pp-1), var(--pp-2));
+    box-shadow:
+      inset 0 0 34px rgba(90,62,25,.28),
+      0 3px 10px rgba(0,0,0,.45);
+  }
+  /* brackets and accent hairlines belong on a screen, not on a sheet */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel::before,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel::after{ display:none; }
+
+  body[data-material="paper"] .screen:not(#screen-quest) .paper-fx{
+    display:block; position:absolute; inset:0; pointer-events:none; z-index:1;
+    background-image:var(--pp-grain), var(--pp-fibre);
+    background-size:180px 180px, 240px 240px;
+    mix-blend-mode:multiply; opacity:.24;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .paper-edge{
+    display:block; position:absolute; inset:0; pointer-events:none; z-index:2;
+    mix-blend-mode:normal;
+  }
+
+  /* Everything written on the sheet is written in ink. */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel h1,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel h2,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel h3,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel strong,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel b,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rname,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .jname,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .jkcal,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .kv,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .kv span,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .eaten-title,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .eaten-total,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .nutri-group,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .covers-label,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rfold-lbl,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .day-name,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .meal-name{
+    color:var(--pp-ink);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .subtitle,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rmeta,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rfold-hint,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .field-label,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rgoal-label,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .muted,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel small{
+    color:var(--pp-soft);
+  }
+  /* a title bar on paper is a ruled heading, not a lit strip */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .field-label:first-child,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .eaten-head:first-child,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .rgoal-label:first-child{
+    background:rgba(0,0,0,.045);
+    border-bottom:1px solid var(--pp-rule);
+    color:var(--pp-soft);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .field-label:first-child::before,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .eaten-head:first-child::before,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel > .rgoal-label:first-child::before{
+    background:var(--pp-seal);
+  }
+  /* controls: drawn on the sheet with a pen, not lit from behind */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .chip,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .btn-ghost,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .mini-btn,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel select,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel input,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel textarea{
+    background:rgba(0,0,0,.05);
+    border:1px solid var(--pp-rule);
+    color:var(--pp-ink);
+    box-shadow:none;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel input::placeholder,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel textarea::placeholder{
+    color:var(--pp-soft); opacity:.75;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .chip.on,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice.on{
+    background:rgba(0,0,0,.10);
+    box-shadow:inset 0 0 0 2px var(--pp-seal);
+    color:var(--pp-ink);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel hr,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rsep,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .divider{
+    border-color:var(--pp-rule); background:var(--pp-rule);
+  }
+  /* the two annotation colours have to survive on cream */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .swap-lighter{ color:#2f5d2a; }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .swap-heartier{ color:#8a3d12; }
+
+  /* -------------------------------------------------------------------------
+     The dark materials — surface changes, type stays where it was
+     ---------------------------------------------------------------------- */
+  body[data-material="digital"] .screen:not(#screen-quest) .paper-fx,
+  body[data-material="pixel"]   .screen:not(#screen-quest) .paper-fx,
+  body[data-material="steel"]   .screen:not(#screen-quest) .paper-fx,
+  body[data-material="race"]    .screen:not(#screen-quest) .paper-fx,
+  body[data-material="cozy"]    .screen:not(#screen-quest) .paper-edge,
+  body[data-material="ledger"]  .screen:not(#screen-quest) .paper-fx{
+    display:block; position:absolute; inset:0; pointer-events:none; z-index:3;
+  }
+
+  body[data-material="digital"] .screen:not(#screen-quest) .paper-fx{
+    background:
+      repeating-linear-gradient(0deg,
+        rgba(0,255,242,.05) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg,
+        rgba(255,60,190,.02) 0 1px, transparent 1px 3px);
+    mix-blend-mode:screen; opacity:.55;
+  }
+  body[data-material="digital"] .screen:not(#screen-quest) .panel{
+    background:
+      radial-gradient(ellipse 120% 90% at 50% 0%, #0a1a22 0%, #050c11 66%, #03070a 100%);
+    border-color:rgba(0,255,242,.24);
+  }
+
+  body[data-material="pixel"] .screen:not(#screen-quest) .panel{
+    border-radius:0; border:3px solid #05060a;
+    background:var(--panel-2);
+    box-shadow:
+      inset 2px 2px 0 rgba(255,255,255,.12),
+      inset -2px -2px 0 rgba(0,0,0,.5),
+      5px 5px 0 rgba(0,0,0,.45);
+  }
+  body[data-material="pixel"] .screen:not(#screen-quest) .panel .chip,
+  body[data-material="pixel"] .screen:not(#screen-quest) .panel .btn-ghost,
+  body[data-material="pixel"] .screen:not(#screen-quest) .panel select,
+  body[data-material="pixel"] .screen:not(#screen-quest) .panel input{ border-radius:0; }
+  body[data-theme="arcade"] .screen:not(#screen-quest) .paper-fx{
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(255,40,40,.14)  0 1px,
+        rgba(40,255,90,.14)  1px 2px,
+        rgba(60,110,255,.14) 2px 3px),
+      repeating-linear-gradient(0deg,
+        rgba(0,0,0,.26) 0 2px, transparent 2px 4px);
+    mix-blend-mode:overlay; opacity:.62;
+  }
+  body[data-theme="craft"] .screen:not(#screen-quest) .paper-fx{
+    background-image:var(--pp-grain); background-size:96px 96px;
+    mix-blend-mode:overlay; opacity:.2;
+  }
+
+  body[data-material="steel"] .screen:not(#screen-quest) .panel{
+    border-radius:2px;
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(255,255,255,.028) 0 1px, transparent 1px 2px,
+        rgba(0,0,0,.04)        2px 3px, transparent 3px 5px),
+      linear-gradient(180deg, #242a2d 0%, #1a1e21 44%, #14181a 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.12),
+      inset 0 -1px 0 rgba(0,0,0,.65),
+      0 5px 14px rgba(0,0,0,.55);
+  }
+  body[data-material="steel"] .screen:not(#screen-quest) .paper-fx{
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(255,140,26,.45) 0 7px, rgba(10,12,13,.6) 7px 14px)
+      0 0/100% 3px no-repeat;
+    opacity:.45;
+  }
+
+  body[data-material="race"] .screen:not(#screen-quest) .panel{
+    border-radius:2px;
+    background-color:#121316;
+    background-image:
+      linear-gradient(27deg,  #191b1f 3.5px, transparent 3.5px),
+      linear-gradient(207deg, #191b1f 3.5px, transparent 3.5px),
+      linear-gradient(27deg,  #212429 3.5px, transparent 3.5px),
+      linear-gradient(207deg, #212429 3.5px, transparent 3.5px),
+      linear-gradient(90deg,  #1b1d21 7px, transparent 7px),
+      linear-gradient(180deg, #202329 25%, #191b20 25%, #191b20 50%,
+                              transparent 50%, transparent 75%,
+                              #262a30 75%, #262a30);
+    background-position:0 3.5px, 7px 0, 0 7px, 7px 3.5px, 0 0, 0 0;
+    background-size:14px 14px;
+  }
+  body[data-material="race"] .screen:not(#screen-quest) .paper-fx{
+    background:
+      linear-gradient(90deg, var(--cyan) 0 34%, rgba(255,92,92,.22) 34%)
+        0 0/100% 2px no-repeat,
+      linear-gradient(163deg,
+        rgba(255,255,255,.06) 0 18%, transparent 34%);
+  }
+
+  body[data-material="cozy"] .screen:not(#screen-quest) .panel{
+    border-radius:16px; border:0;
+    background:
+      repeating-linear-gradient(0deg,
+        rgba(255,255,255,.028) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.045) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, #2a3d1d 0%, #223217 45%, #18240f 100%);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.10),
+      inset 0 -3px 0 rgba(0,0,0,.32),
+      0 7px 18px rgba(0,0,0,.4);
+  }
+  body[data-material="cozy"] .screen:not(#screen-quest) .paper-edge{
+    inset:8px; border-radius:10px;
+    border:2px dashed rgba(199,229,138,.26);
+  }
+
+  body[data-material="ledger"] .screen:not(#screen-quest) .panel{
+    border-radius:2px 8px 8px 2px;
+    padding-left:calc(var(--pad) + 18px);
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0 25px, rgba(226,138,58,.08) 25px 26px),
+      linear-gradient(90deg, #0d1613 0 22px, transparent 22px),
+      linear-gradient(180deg, #1b2a23, #0f1815);
+    box-shadow:
+      inset 24px 0 18px -19px rgba(0,0,0,.8),
+      0 5px 14px rgba(0,0,0,.5);
+  }
+  body[data-material="ledger"] .screen:not(#screen-quest) .paper-fx{
+    background:
+      repeating-linear-gradient(180deg,
+        transparent 0 13px,
+        rgba(226,138,58,.38) 13px 19px,
+        transparent 19px 26px) 11px 0/2px 100% no-repeat;
+  }
+
+
+  /* ---- pass 12: ink that was left behind ---------------------------------
+     Found by sweeping every panel for text whose own luminance was still
+     high after the sheet went cream. Anything set by a more specific rule
+     than the blanket ink one kept its screen-era colour.
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-title,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rsteps li,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rfold summary,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel details > summary{
+    color:var(--pp-ink);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rsteps li::marker{
+    color:var(--pp-seal);
+  }
+  /* pills are stamped into the sheet, not lit */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-tag,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rtag,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rtag.goal{
+    color:var(--pp-ink);
+    border-color:var(--pp-rule);
+    background:rgba(0,0,0,.045);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rtag.goal.mine{
+    color:#2f5d2a; border-color:rgba(47,93,42,.5);
+  }
+  /* the calorie bar: a ruled gauge rather than a backlit strip */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-bar{
+    background:rgba(0,0,0,.07);
+    border:1px solid var(--pp-rule);
+    box-shadow:none;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-bar b,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-bar span,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-bar strong{
+    color:var(--pp-ink); text-shadow:none;
+  }
+  /* the two accent numerals keep their distinction, at paper weight */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel strong{
+    color:var(--pp-ink);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rcount-n,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .n-green{ color:#2f5d2a; }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .n-amber{ color:#8a3d12; }
+
+  /* the two running counts; paper restates them at ink weight */
+  .n-green{ color:var(--green); }
+  .n-amber{ color:var(--amber); }
+
+  /* ---- pass 13: legibility repair ----------------------------------------
+     A control standing on paper is drawn on paper. Recolouring its text and
+     leaving its surface dark is what produced ink-on-charcoal at 1.04:1.
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn .tag,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .seg,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .swatch,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .qb-chip,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .tier-row,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .stat-row,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .hero-kcal,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .slot-pick,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .rfold,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .quest-node,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .bar-track,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .stat-bar,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .cook-bar,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .cs-band-track,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .cs-pips i{
+    background:rgba(0,0,0,.05);
+    border-color:var(--pp-rule);
+    color:var(--pp-ink);
+    box-shadow:none;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn.selected{
+    background:rgba(0,0,0,.11);
+    box-shadow:inset 0 0 0 2px var(--pp-seal);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn::before,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn::after{
+    background:var(--pp-seal);
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .choice-btn .desc{
+    color:var(--pp-soft);
+  }
+  /* accents picked to glow on black go to the seal colour on paper */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .hero-rank,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .sheet-class,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .hero-name,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .stat-val{
+    color:var(--pp-seal);
+  }
+
+  /* Rebind the palette itself inside a paper panel rather than chasing class
+     names. Anything that reads var(--muted) is then correct by construction,
+     including the classes not yet met. */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel{
+    --text:var(--pp-ink);
+    --muted:var(--pp-soft);
+    --line:var(--pp-rule);
+    --accent-line:var(--pp-rule);
+    --green:#2f5d2a;
+    --amber:#8a3d12;
+    /* --cyan is deliberately left alone: it is used as a *background* for
+       primary buttons and badges with dark text over it, so darkening it to
+       the seal colour put dark on dark. The few places it was wrong as a
+       text colour are fixed above by name instead. */
+  }
+
+  /* The stock carries stain and vignette, so the background under a caption
+     is darker than the swatch these were chosen against. */
+  body[data-theme="fantasy"]{  --pp-soft:#563f20; }
+  body[data-theme="horror"]{   --pp-soft:#3d3636; }
+  body[data-theme="survival"]{ --pp-soft:#454036; }
+
+
+  /* ---- pass 14: recessed plates on paper ---------------------------------
+     --readout is --bg-0, which is a recessed plate on a screen and a hole in
+     the page on paper. On a sheet a readout is an impression, not a void.
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel{
+    --readout:rgba(0,0,0,.055);
+    --sunk:
+      inset 0 1px 2px rgba(50,34,12,.30),
+      inset 0 -1px 0 rgba(255,255,255,.30);
+  }
+  /* the accent rule down the side of a vitals field, in ink not neon */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .vital::before{
+    background:var(--pp-seal); opacity:.7;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .vital,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-val,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .res-ico{
+    border-color:var(--pp-rule);
+  }
+  /* the portrait stays dark on purpose — a tintype pinned to the sheet */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .portrait{
+    box-shadow:
+      0 2px 8px rgba(40,26,8,.5),
+      inset 0 0 0 1px rgba(255,255,255,.10);
+  }
+
+
+  /* ---- pass 15: attribute hues on paper ----------------------------------
+     Per-attribute colours were picked against near-black. Mixed down toward
+     the sheet's ink so the coding survives but the text reads.
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-glyph,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-note span:first-child,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-val,
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .stat-val{
+    color:var(--pp-ink);
+    color:color-mix(in srgb, var(--c, var(--pp-ink)) 46%, var(--pp-ink));
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-note span:first-child{
+    opacity:1;
+  }
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-val{
+    border-bottom-color:var(--pp-rule);
+    border-bottom-color:color-mix(in srgb, var(--c, var(--pp-rule)) 55%, var(--pp-ink));
+  }
+  /* the bar itself keeps the hue — it is a filled shape, not type, so it
+     only has to be distinguishable, not readable */
+  body[data-material="paper"] .screen:not(#screen-quest) .panel .attr-bar{
+    box-shadow:inset 0 0 0 1px var(--pp-rule);
+  }
+
+
+  /* =========================================================================
+     ==  SKIN XIII  —  THE SURFACE UNDERNEATH  ===============================
+     On body's own background, which always paints behind content.
+     ========================================================================= */
+  body[data-theme]{ background-attachment:fixed; }
+
+  /* Dark oak: plank seams every 132px, grain slightly off-square so it is
+     sawn timber rather than a ruled pattern. */
+  body[data-theme="fantasy"]{
+    background-color:#1d150c;
+    background-image:
+      radial-gradient(120% 78% at 50% -10%, rgba(255,222,166,.07), transparent 60%),
+      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.6), transparent 64%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.55) 0 3px, transparent 3px 132px),
+      repeating-linear-gradient(87deg,
+        rgba(0,0,0,.06) 0 2px, transparent 2px 6px,
+        rgba(255,236,200,.022) 6px 7px, transparent 7px 13px),
+      linear-gradient(180deg, #402e1a, #1c1409);
+  }
+  /* Stained boards gone cold — the same timber, no warmth left in it */
+  body[data-theme="horror"]{
+    background-color:#0d0a0b;
+    background-image:
+      radial-gradient(120% 70% at 50% -12%, rgba(255,210,210,.045), transparent 56%),
+      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.72), transparent 62%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.6) 0 3px, transparent 3px 118px),
+      repeating-linear-gradient(88deg,
+        rgba(0,0,0,.07) 0 2px, transparent 2px 7px,
+        rgba(220,200,200,.014) 7px 8px, transparent 8px 15px),
+      linear-gradient(180deg, #241a1b, #0d0909);
+  }
+  /* Poured concrete, blotched where it cured unevenly */
+  body[data-theme="survival"]{
+    background-color:#16150f;
+    background-image:
+      radial-gradient(110% 68% at 50% -8%, rgba(255,244,214,.05), transparent 58%),
+      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.62), transparent 64%),
+      radial-gradient(ellipse 30% 22% at 18% 26%, rgba(120,110,88,.10), transparent 70%),
+      radial-gradient(ellipse 26% 20% at 78% 62%, rgba(120,110,88,.08), transparent 70%),
+      linear-gradient(180deg, #2b2921, #131209);
+  }
+  /* A dark room with a floor grid and a little bounce off the screen */
+  body[data-theme="cyberpunk"]{
+    background-color:#03070a;
+    background-image:
+      radial-gradient(120% 62% at 50% -6%, rgba(0,255,242,.09), transparent 58%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.7), transparent 62%),
+      repeating-linear-gradient(0deg,  rgba(0,255,242,.035) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(90deg, rgba(0,255,242,.035) 0 1px, transparent 1px 46px),
+      linear-gradient(180deg, #071620, #02060a);
+  }
+  /* Arcade carpet, seen dimly under the cabinet */
+  body[data-theme="arcade"]{
+    background-color:#0a0616;
+    background-image:
+      radial-gradient(120% 60% at 50% -6%, rgba(160,90,255,.14), transparent 60%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.74), transparent 60%),
+      repeating-linear-gradient(45deg,
+        rgba(255,60,180,.045) 0 6px, transparent 6px 14px),
+      repeating-linear-gradient(-45deg,
+        rgba(60,190,255,.045) 0 6px, transparent 6px 14px),
+      linear-gradient(180deg, #1a0f33, #070414);
+  }
+  /* Packed dirt and stone */
+  body[data-theme="craft"]{
+    background-color:#100f0a;
+    background-image:
+      radial-gradient(110% 64% at 50% -8%, rgba(210,236,170,.05), transparent 58%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.68), transparent 62%),
+      repeating-linear-gradient(0deg,  rgba(0,0,0,.30) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.30) 0 1px, transparent 1px 24px),
+      linear-gradient(180deg, #26241a, #100e08);
+  }
+  /* Deck plate with a tread pattern */
+  body[data-theme="fps"]{
+    background-color:#0c0f10;
+    background-image:
+      radial-gradient(120% 66% at 50% -8%, rgba(255,190,120,.05), transparent 56%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.7), transparent 62%),
+      repeating-linear-gradient(45deg,
+        rgba(255,255,255,.022) 0 2px, transparent 2px 12px),
+      repeating-linear-gradient(-45deg,
+        rgba(0,0,0,.28) 0 2px, transparent 2px 12px),
+      linear-gradient(180deg, #1e2326, #0b0e0f);
+  }
+  /* Asphalt */
+  body[data-theme="racing"]{
+    background-color:#0c0c0e;
+    background-image:
+      radial-gradient(120% 62% at 50% -8%, rgba(255,255,255,.05), transparent 56%),
+      radial-gradient(150% 100% at 50% 114%, rgba(0,0,0,.72), transparent 60%),
+      repeating-linear-gradient(63deg,
+        rgba(255,255,255,.016) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(-27deg,
+        rgba(0,0,0,.24) 0 1px, transparent 1px 5px),
+      linear-gradient(180deg, #1c1d20, #0a0a0c);
+  }
+  /* A scrubbed pine table */
+  body[data-theme="farm"]{
+    background-color:#12180d;
+    background-image:
+      radial-gradient(120% 72% at 50% -10%, rgba(255,240,180,.055), transparent 60%),
+      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.68), transparent 64%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.45) 0 3px, transparent 3px 124px),
+      repeating-linear-gradient(89deg,
+        rgba(0,0,0,.05) 0 2px, transparent 2px 7px,
+        rgba(255,246,210,.022) 7px 8px, transparent 8px 15px),
+      /* kept well under the panel: the table must not compete with the cloth */
+      linear-gradient(180deg, #222b12, #0c1107);
+  }
+  /* Waxed canvas, the kind a logbook lives in */
+  body[data-theme="outdoors"]{
+    background-color:#0e1412;
+    background-image:
+      radial-gradient(120% 70% at 50% -10%, rgba(226,190,120,.06), transparent 58%),
+      radial-gradient(140% 100% at 50% 112%, rgba(0,0,0,.62), transparent 64%),
+      repeating-linear-gradient(0deg,
+        rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.22) 0 1px, transparent 1px 4px),
+      linear-gradient(180deg, #22302a, #0c110f);
+  }
+
+
+  /* ---- pass 17: grounding ------------------------------------------------
+     An object on a surface casts twice: tight and dark where it touches,
+     wide and soft further out. Without both it floats.
+     ---------------------------------------------------------------------- */
+  body[data-material="paper"] .screen .panel{
+    box-shadow:
+      inset 0 0 34px rgba(90,62,25,.26),
+      0 2px 3px rgba(24,14,4,.55),
+      0 12px 26px rgba(16,9,2,.52);
+  }
+  body[data-material="cozy"] .screen .panel,
+  body[data-material="ledger"] .screen .panel{
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.10),
+      inset 0 -3px 0 rgba(0,0,0,.32),
+      0 2px 3px rgba(0,0,0,.5),
+      0 12px 24px rgba(0,0,0,.45);
+  }
+  body[data-material="steel"] .screen .panel,
+  body[data-material="race"] .screen .panel{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.12),
+      inset 0 -1px 0 rgba(0,0,0,.6),
+      0 2px 3px rgba(0,0,0,.6),
+      0 12px 26px rgba(0,0,0,.5);
+  }
+  body[data-material="pixel"] .screen .panel{
+    box-shadow:
+      inset 2px 2px 0 rgba(255,255,255,.12),
+      inset -2px -2px 0 rgba(0,0,0,.5),
+      5px 5px 0 rgba(0,0,0,.5),
+      0 14px 26px rgba(0,0,0,.45);
+  }
+  body[data-material="digital"] .screen .panel{
+    box-shadow:
+      0 0 0 1px rgba(0,255,242,.10),
+      0 0 26px rgba(0,255,242,.08),
+      inset 0 0 60px rgba(0,0,0,.66),
+      0 12px 28px rgba(0,0,0,.55);
+  }
+
+  /* The month arrows sit over the scorched edge of the survival stock, which
+     is much darker than the middle of the sheet, so they get their own fill
+     rather than relying on the sheet showing through. */
+  body[data-theme="survival"] #screen-quest .mini-btn{
+    background:rgba(238,228,204,.55);
+    border-color:var(--pp-rule);
+    color:var(--pp-ink);
+  }
+
+
+  /* =========================================================================
+     ==  SKIN XV  —  THE UPRIGHT  ============================================
+     The parts below sum to 238u tall against 100u wide, the 1:2.38 silhouette
+     of a real upright — so the width is taken from the available HEIGHT and
+     the machine then fills it. Sized from width instead, it ends up a square
+     with words on it, floating in black.
+     The shell is oak that stood in a bowling alley for thirty years; colour
+     lives in the marquee lamp, the ball top and the two buttons, nowhere else.
+     ========================================================================= */
+  body.attract-mode .screen{
+    padding-top:0; padding-bottom:0; max-width:none;
+  }
+  .attract{
+    justify-content:center;
+    min-height:100vh; min-height:100dvh;
+    padding:calc(8px + var(--safe-top)) 0 calc(8px + var(--safe-bottom));
+  }
+  .cabinet{
+    --fit-h:calc(100vh - 22px - var(--safe-top) - var(--safe-bottom));
+    --fit-h:calc(100dvh - 22px - var(--safe-top) - var(--safe-bottom));
+    --cab-w:min(94vw, 420px, calc(var(--fit-h) / 2.38));
+    --u:calc(var(--cab-w) / 100);
+    --wood-hi:#8b5c33;
+    --wood-mid:#6a4020;
+    --wood-lo:#42280f;
+    --wood-edge:#241407;
+    /* real fibre, not stripes: turbulence stretched along the grain */
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.015 .9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23w)' opacity='.22'/%3E%3C/svg%3E");
+    position:relative;
+    width:var(--cab-w);
+    display:flex; flex-direction:column; align-items:stretch;
+    filter:drop-shadow(0 calc(var(--u) * 3) calc(var(--u) * 6) rgba(0,0,0,.8));
+  }
+
+  /* T-molding down both edges, the way side panels are actually finished */
+  .cabinet::before, .cabinet::after{
+    content:''; position:absolute; z-index:1;
+    top:calc(var(--u) * 4.5); bottom:calc(var(--u) * 7);
+    width:calc(var(--u) * 2.2);
+    border-radius:calc(var(--u) * 1.1);
+    background:linear-gradient(90deg, #120c06, #4a3625 46%, #0c0805);
+  }
+  .cabinet::before{ left:0; }
+  .cabinet::after{ right:0; }
+
+  /* -- one board, cut once, reused by every wooden part ------------------ */
+  .cab-crown, .cab-header, .cab-grille, .cab-bezel, .cab-body{
+    background-color:var(--wood-mid);
+    background-image:
+      var(--grain),
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.15) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(90deg,
+        rgba(255,255,255,.05) 0 1px, transparent 1px 15px),
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.1) 0 2px, transparent 2px 29px),
+      linear-gradient(90deg,
+        rgba(0,0,0,.62) 0, rgba(0,0,0,0) 13%,
+        rgba(255,255,255,.08) 44%,
+        rgba(0,0,0,0) 79%, rgba(0,0,0,.64) 100%),
+      linear-gradient(180deg, var(--wood-hi) 0%, var(--wood-mid) 55%, var(--wood-lo) 100%);
+  }
+
+  /* -- crown: the top of the cabinet, seen from a little below ----------- */
+  .cab-crown{
+    height:calc(var(--u) * 4.5);
+    margin:0 calc(var(--u) * 3);
+    border-radius:calc(var(--u) * 2.5) calc(var(--u) * 2.5) 0 0;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.24),
+      inset 0 calc(var(--u) * -1.2) calc(var(--u) * 1.6) rgba(0,0,0,.6);
+  }
+
+  /* -- marquee: a lamp behind printed acrylic, held by two retainers ----- */
+  .cab-header{
+    position:relative;
+    padding:calc(var(--u) * 3.5) calc(var(--u) * 6);
+    box-shadow:inset 0 calc(var(--u) * -1) calc(var(--u) * 1.4) rgba(0,0,0,.45);
+  }
+  .cab-header::before, .cab-header::after{   /* aluminium retainer rails */
+    content:''; position:absolute; z-index:2;
+    left:calc(var(--u) * 5); right:calc(var(--u) * 5);
+    height:calc(var(--u) * 1.8);
+    border-radius:calc(var(--u) * 0.6);
+    background:linear-gradient(180deg, #d3d9df 0%, #868d94 52%, #3b4045 100%);
+    box-shadow:0 calc(var(--u) * 0.4) calc(var(--u) * 0.8) rgba(0,0,0,.55);
+  }
+  .cab-header::before{ top:calc(var(--u) * 2.5); }
+  .cab-header::after{ bottom:calc(var(--u) * 2.5); }
+  .cab-plate{
+    position:relative; overflow:hidden;
+    min-height:calc(var(--u) * 17);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:calc(var(--u) * 2.4);
+    padding:calc(var(--u) * 3);
+    border-radius:calc(var(--u) * 0.6);
+    background:radial-gradient(135% 165% at 50% 128%,
+      #fff8e6 0%, #f4e4c1 46%, #d7bd92 100%);
+    box-shadow:
+      inset 0 0 calc(var(--u) * 5) rgba(120,84,38,.35),
+      inset 0 0 0 calc(var(--u) * 0.5) rgba(255,255,255,.65),
+      0 0 calc(var(--u) * 9) rgba(255,220,155,.38),
+      0 calc(var(--u) * 0.7) 0 rgba(0,0,0,.5);
+  }
+  .cab-plate::before{           /* the tube itself, seen through the print */
+    content:''; position:absolute; left:4%; right:4%;
+    top:calc(var(--u) * 1.4); height:calc(var(--u) * 1.4);
+    border-radius:99px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.85), transparent);
+    filter:blur(calc(var(--u) * 0.8));
+  }
+  .cab-plate::after{            /* the printed keyline every marquee has */
+    content:''; position:absolute; inset:calc(var(--u) * 1.6);
+    border-radius:calc(var(--u) * 0.4);
+    box-shadow:
+      inset 0 0 0 calc(var(--u) * 0.35) rgba(58,34,16,.5),
+      inset 0 0 0 calc(var(--u) * 0.9) rgba(255,255,255,.35);
+  }
+  .cabinet .attract-logo{
+    position:relative; z-index:1; margin:0;
+    font-size:max(14px, calc(var(--u) * 8)); letter-spacing:calc(var(--u) * 0.55);
+    color:#3a2210;
+    text-shadow:
+      0 calc(var(--u) * 0.4) 0 rgba(255,255,255,.6),
+      0 calc(var(--u) * -0.25) 0 rgba(90,54,24,.35);
+  }
+  .cabinet .attract-sub{
+    position:relative; z-index:1; margin:0;
+    font-size:max(6px, calc(var(--u) * 2.3)); letter-spacing:calc(var(--u) * 0.5);
+    color:#7c4c1e;
+  }
+
+  /* -- speaker grille, catching the spill off the marquee ---------------- */
+  .cab-grille{
+    height:calc(var(--u) * 6);
+    padding:calc(var(--u) * 1.6) calc(var(--u) * 12);
+    box-shadow:
+      inset 0 calc(var(--u) * 2.5) calc(var(--u) * 3.5) rgba(255,214,150,.13),
+      inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .cab-grille i{
+    display:block; height:100%;
+    border-radius:calc(var(--u) * 0.6);
+    background:
+      radial-gradient(circle calc(var(--u) * 0.75) at 50% 50%,
+        #05070a 0 60%, transparent 62%)
+      0 0/calc(var(--u) * 2.6) calc(var(--u) * 2.6),
+      linear-gradient(180deg, #2c1f13, #150e07);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+  }
+
+  /* -- monitor bezel and tube -------------------------------------------- */
+  .cab-bezel{
+    padding:calc(var(--u) * 2.5) calc(var(--u) * 6) calc(var(--u) * 3);
+    box-shadow:inset 0 calc(var(--u) * 2) calc(var(--u) * 3) rgba(255,214,150,.07);
+  }
+  .cab-glass{
+    padding:calc(var(--u) * 5) calc(var(--u) * 5) calc(var(--u) * 7);
+    border-radius:calc(var(--u) * 2);
+    background:linear-gradient(180deg, #1b1b1b 0%, #0d0d0d 60%, #050505 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.1),
+      inset 0 calc(var(--u) * -1) calc(var(--u) * 1.5) rgba(0,0,0,.8),
+      0 calc(var(--u) * 0.6) 0 rgba(0,0,0,.5);
+  }
+  .cab-screen{
+    position:relative; overflow:hidden;
+    width:100%; aspect-ratio:4 / 3; min-height:calc(var(--u) * 50);
+    border-radius:calc(var(--u) * 2.4);
+    display:flex; align-items:center; justify-content:center;
+    padding:calc(var(--u) * 4);
+    background:radial-gradient(118% 118% at 50% 44%, #070707 0%, #000 72%);
+    box-shadow:
+      inset 0 0 calc(var(--u) * 11) rgba(0,0,0,1),
+      inset 0 0 0 1px rgba(255,255,255,.07),
+      0 0 0 calc(var(--u) * 0.9) #000,
+      0 0 0 calc(var(--u) * 1.5) rgba(255,255,255,.07);
+  }
+  .cab-screen::before{          /* raster */
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg,
+      rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+  }
+  .cab-screen::after{           /* sheen off the curved glass */
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(152deg, rgba(255,255,255,.07) 0 16%, transparent 38%),
+      radial-gradient(140% 90% at 50% 108%, rgba(0,0,0,.5), transparent 60%);
+  }
+  .cabinet .attract-blink{
+    position:relative; z-index:1; margin:0; text-align:center;
+    font-size:max(10px, calc(var(--u) * 4.4)); line-height:2;
+    letter-spacing:calc(var(--u) * 0.5); color:#fff;
+    text-shadow:0 0 calc(var(--u) * 3) rgba(255,255,255,.4);
+  }
+
+  /* -- control panel: proud of the sides, and sloping away from you ------ */
+  .cab-deck{
+    position:relative; z-index:3;
+    margin:0 calc(var(--u) * -4);
+    border-radius:calc(var(--u) * 1.6) calc(var(--u) * 1.6) 0 0;
+    padding:calc(var(--u) * 5) calc(var(--u) * 5) calc(var(--u) * 4.5);
+    display:flex; align-items:center; justify-content:center;
+    gap:calc(var(--u) * 9);
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(255,255,255,.03) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0) 26%),
+      linear-gradient(180deg, #2f2013 0%, #1d1309 55%, #130c06 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28);
+  }
+  .cab-lip{                     /* the front edge of the panel, below it */
+    position:relative; z-index:3;
+    margin:0 calc(var(--u) * -4);
+    height:calc(var(--u) * 5.5);
+    border-radius:0 0 calc(var(--u) * 1.6) calc(var(--u) * 1.6);
+    background:linear-gradient(180deg, #26190a 0%, #150d05 55%, #0a0603 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      0 calc(var(--u) * 1.6) calc(var(--u) * 2.6) rgba(0,0,0,.7);
+  }
+  /* the stick: red ball, shaft, dust washer, elliptical mounting plate */
+  .cab-stick{
+    position:relative; flex:0 0 auto;
+    width:calc(var(--u) * 15); height:calc(var(--u) * 17);
+    background:linear-gradient(90deg,
+      transparent calc(50% - var(--u) * 1.4),
+      #2f343a     calc(50% - var(--u) * 1.4),
+      #a3abb3     calc(50% - var(--u) * 0.4),
+      #5b6167     calc(50% + var(--u) * 0.6),
+      #23272c     calc(50% + var(--u) * 1.4),
+      transparent calc(50% + var(--u) * 1.4))
+      50% calc(var(--u) * 6.5)/100% calc(var(--u) * 7) no-repeat;
+  }
+  .cab-stick::before{           /* plate, an ellipse because it lies flat */
+    content:''; position:absolute; left:50%; bottom:0;
+    transform:translateX(-50%);
+    width:calc(var(--u) * 15); height:calc(var(--u) * 5.5);
+    border-radius:50%;
+    background:radial-gradient(ellipse at 50% 30%, #545a62, #15181c 72%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.3),
+      0 calc(var(--u) * 0.6) calc(var(--u) * 1.6) rgba(0,0,0,.65);
+  }
+  .cab-stick::after{            /* red ball top */
+    content:''; position:absolute; left:50%; top:0;
+    transform:translateX(-50%);
+    width:calc(var(--u) * 9.5); height:calc(var(--u) * 9);
+    border-radius:50%;
+    background:radial-gradient(circle at 34% 26%,
+      #ff8a84 0%, #dd2029 46%, #8b0d15 100%);
+    box-shadow:
+      0 calc(var(--u) * 1.2) 0 #5d0a11,
+      0 calc(var(--u) * 2.4) calc(var(--u) * 2.2) rgba(0,0,0,.65),
+      inset 0 calc(var(--u) * 0.8) calc(var(--u) * 1.6) rgba(255,255,255,.32);
+  }
+  .cab-btns{
+    flex:0 0 auto; display:flex; align-items:center;
+    gap:calc(var(--u) * 5);
+  }
+  /* ellipses, not circles: a round button on a sloped panel reads as one */
+  .cabinet .arcade-btn{
+    flex:0 0 auto;
+    width:calc(var(--u) * 21); height:calc(var(--u) * 16);
+    border-radius:50%;
+    font-size:max(7px, calc(var(--u) * 2.4)); letter-spacing:calc(var(--u) * 0.2);
+    border-width:calc(var(--u) * 0.7); border-color:var(--btn-deep);
+    box-shadow:
+      0 calc(var(--u) * 1.8) 0 var(--btn-deep),
+      0 calc(var(--u) * 2.8) calc(var(--u) * 3.2) rgba(0,0,0,.65),
+      inset 0 calc(var(--u) * 0.8) calc(var(--u) * 2) rgba(255,255,255,.3);
+  }
+  .cabinet .ab-start{
+    --btn-deep:#5f0910;
+    background:radial-gradient(circle at 34% 24%,
+      #ff7d76 0%, #d8202b 46%, #8b0d15 100%);
+  }
+  .cabinet .ab-select{
+    --btn-deep:#0b2c55;
+    background:radial-gradient(circle at 34% 24%,
+      #86c6ff 0%, #1f6ecf 46%, #103f78 100%);
+  }
+  .cabinet .arcade-btn:active{
+    transform:translateY(calc(var(--u) * 1.4));
+    box-shadow:
+      0 calc(var(--u) * 0.4) 0 var(--btn-deep),
+      0 calc(var(--u) * 1) calc(var(--u) * 2) rgba(0,0,0,.5),
+      inset 0 calc(var(--u) * 0.8) calc(var(--u) * 2) rgba(255,255,255,.2);
+  }
+
+  /* -- lower body: the tall, mostly empty half nobody draws but everyone
+        recognises, with the access door seam and the coin door ---------- */
+  .cab-body{
+    position:relative;
+    min-height:calc(var(--u) * 84);
+    display:flex; flex-direction:column; align-items:center;
+    gap:calc(var(--u) * 2.6);
+    padding:calc(var(--u) * 7) calc(var(--u) * 6) calc(var(--u) * 5);
+    box-shadow:
+      inset 0 calc(var(--u) * 2) calc(var(--u) * 3) rgba(0,0,0,.55),
+      inset 0 calc(var(--u) * -4) calc(var(--u) * 4) rgba(0,0,0,.55);
+  }
+  .cab-body::before{            /* the seam of the front access door */
+    content:''; position:absolute;
+    left:calc(var(--u) * 4); right:calc(var(--u) * 4);
+    top:calc(var(--u) * 3.5); bottom:calc(var(--u) * 3);
+    border-radius:calc(var(--u) * 1);
+    box-shadow:
+      inset 0 0 0 1px rgba(0,0,0,.45),
+      0 0 0 1px rgba(255,255,255,.06);
+  }
+  .cab-coin{
+    position:relative;
+    width:calc(var(--u) * 44); height:calc(var(--u) * 14);
+    border-radius:calc(var(--u) * 0.8);
+    background:
+      linear-gradient(#07080a,#07080a) 30% 24%/calc(var(--u) * 1.8) calc(var(--u) * 5.6) no-repeat,
+      linear-gradient(#07080a,#07080a) 70% 24%/calc(var(--u) * 1.8) calc(var(--u) * 5.6) no-repeat,
+      linear-gradient(#07080a,#07080a) 50% 86%/calc(var(--u) * 17) calc(var(--u) * 3.2) no-repeat,
+      linear-gradient(180deg, #7f7058 0%, #4e4234 55%, #2a231b 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.34),
+      inset 0 calc(var(--u) * -1.4) calc(var(--u) * 1.6) rgba(0,0,0,.6),
+      0 calc(var(--u) * 0.6) 0 rgba(0,0,0,.55);
+  }
+  .cab-coin::before{            /* the lock, between the two slots */
+    content:''; position:absolute; left:50%; top:calc(var(--u) * 2.6);
+    transform:translateX(-50%);
+    width:calc(var(--u) * 3.6); height:calc(var(--u) * 3.6);
+    border-radius:50%;
+    background:radial-gradient(circle at 38% 30%, #cdd2d7, #6d7378 55%, #24282c);
+    box-shadow:inset 0 0 0 calc(var(--u) * 0.3) rgba(0,0,0,.45);
+  }
+  .cabinet .attract-credit{
+    position:relative; margin:0;
+    font-size:max(6px, calc(var(--u) * 2));
+    letter-spacing:calc(var(--u) * 0.35);
+    color:#caa87a; opacity:.7;
+  }
+  /* -- kick plate and the floor it stands on ------------------------------*/
+  .cab-base{
+    position:relative;
+    height:calc(var(--u) * 7);
+    margin:0 calc(var(--u) * 2.5);
+    border-radius:0 0 calc(var(--u) * 1.2) calc(var(--u) * 1.2);
+    background:linear-gradient(180deg, #23180e 0%, #100a05 60%, #060403 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .cab-base::after{
+    content:''; position:absolute; left:-7%; right:-7%;
+    bottom:calc(var(--u) * -2.5); height:calc(var(--u) * 5);
+    border-radius:50%;
+    background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.8), transparent 70%);
+    filter:blur(calc(var(--u) * 1.2));
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .cab-plate::before{ animation:cabFlicker 6s ease-in-out infinite; }
+    @keyframes cabFlicker{
+      0%,92%,100%{ opacity:1; } 94%{ opacity:.45; } 96%{ opacity:1; } 98%{ opacity:.7; }
+    }
+  }
+
   @media print{
     .cal-mark, .bench-pips, .qb-bar i{ box-shadow:none!important; }
   }
@@ -4546,12 +5500,37 @@
   <!-- SCREEN 0: ATTRACT -->
   <section class="screen active" id="screen-attract">
     <div class="attract">
-      <div class="attract-logo">LOADOUT</div>
-      <div class="attract-sub">MEAL PREP CALCULATOR</div>
-      <div class="attract-blink">PRESS START BUTTON</div>
-      <button class="arcade-btn" id="btnStart" aria-label="Press start">START</button>
+      <div class="cabinet">
+        <div class="cab-crown" aria-hidden="true"></div>
+        <div class="cab-header">
+          <div class="cab-plate">
+            <span class="attract-logo">LOADOUT</span>
+            <span class="attract-sub">MEAL PREP CALCULATOR</span>
+          </div>
+        </div>
+        <div class="cab-grille" aria-hidden="true"><i></i></div>
+        <div class="cab-bezel">
+          <div class="cab-glass">
+            <div class="cab-screen">
+              <div class="attract-blink">PRESS START<br>TO PLAY</div>
+            </div>
+          </div>
+        </div>
+        <div class="cab-deck">
+          <span class="cab-stick" aria-hidden="true"></span>
+          <span class="cab-btns">
+            <button class="arcade-btn ab-start" id="btnStart" aria-label="Press start">START</button>
+            <button class="arcade-btn ab-select" id="btnSelect" aria-label="Select game">SELECT</button>
+          </span>
+        </div>
+        <div class="cab-lip" aria-hidden="true"></div>
+        <div class="cab-body">
+          <div class="cab-coin" aria-hidden="true"></div>
+          <div class="attract-credit">INSERT PROTEIN &mdash; 1 CREDIT</div>
+        </div>
+        <div class="cab-base" aria-hidden="true"></div>
+      </div>
       <button class="btn-ghost" id="attractContinue" style="display:none; max-width:260px; margin-top:22px;">CONTINUE SAVED GAME</button>
-      <div class="attract-credit">INSERT PROTEIN &mdash; 1 CREDIT</div>
     </div>
   </section>
 
@@ -10729,9 +11708,9 @@
       : [];
 
     document.getElementById('recipeCount').innerHTML = ((list.length || swaps.length || sauceHits.length)
-      ? `<strong style="color:var(--green)">${list.length}</strong> of ${RECIPES.length} recipes`
+      ? `<strong class="n-green">${list.length}</strong> of ${RECIPES.length} recipes`
         + (swaps.length ? ` · <strong style="color:var(--muted)">${swaps.length}</strong> that can take it as a swap` : '')
-        + (sauceHits.length ? ` · <strong style="color:var(--amber)">${sauceHits.length}</strong> sauces` : '')
+        + (sauceHits.length ? ` · <strong class="n-amber">${sauceHits.length}</strong> sauces` : '')
       : `Nothing matches. Try a different word, or clear the filter.`)
       + `<span class="rgoal-hint">${goal === 'any'
           ? (myGoal ? `Calories below are quoted at ${escapeHtml(GOAL_SHORT[myGoal] || 'maintenance')} portions — your goal. Pick a different goal above to see the same dishes sized for it.`
@@ -11629,7 +12608,7 @@
             <div class="cook-name" style="color:${col}">${i+1}. ${escapeHtml(j.name)}
               <span class="gear-tag">${ic(GEAR[j.gear].icon)} ${escapeHtml(j.form || GEAR[j.gear].name)}</span></div>
             <div class="cook-meta">${j.servings} serving${j.servings === 1 ? '' : 's'} ·
-              <strong style="color:var(--green)">${mins(j.active)} hands-on</strong>
+              <strong class="n-green">${mins(j.active)} hands-on</strong>
               ${j.total > j.active ? ` · ${mins(j.total - j.active)} unattended · done by ${clockAt(j.end)}` : ''}</div>
             <div class="cook-bar"><span style="width:${activePct}%; background:${col};"></span></div>
           </div>
@@ -11844,11 +12823,11 @@
     const nMeals = p.meals.length, nSnacks = p.snacks.length;
     const nTrain = p.schedule.filter(r=>r.kind === 'train').length;
     intro.innerHTML =
-      `<strong style="color:var(--green)">${nMeals}</strong> different ${nMeals===1?'meal':'meals'}` +
-      (nSnacks ? ` and <strong style="color:var(--green)">${nSnacks}</strong> snack${nSnacks===1?'':'s'}` : '') +
+      `<strong class="n-green">${nMeals}</strong> different ${nMeals===1?'meal':'meals'}` +
+      (nSnacks ? ` and <strong class="n-green">${nSnacks}</strong> snack${nSnacks===1?'':'s'}` : '') +
       `, spread across <strong>${days}</strong> day${days===1?'':'s'}` +
       (hasSplit() && nTrain
-        ? ` — <strong style="color:var(--green)">${nTrain} training</strong> and ` +
+        ? ` — <strong class="n-green">${nTrain} training</strong> and ` +
           `<strong style="color:var(--cyan)">${days - nTrain} rest</strong>, portioned to match`
         : '') +
       `. Tap a day to see it.`;
@@ -11856,8 +12835,8 @@
     const introTot = containerTotals();
     if (introTot.cooked && introTot.left < introTot.cooked){
       intro.innerHTML += introTot.left
-        ? ` <strong style="color:var(--amber)">${introTot.left} of ${introTot.cooked} ${servingWord(introTot.cooked)} still in the fridge.</strong>`
-        : ` <strong style="color:var(--amber)">Everything cooked has been eaten.</strong>`;
+        ? ` <strong class="n-amber">${introTot.left} of ${introTot.cooked} ${servingWord(introTot.cooked)} still in the fridge.</strong>`
+        : ` <strong class="n-amber">Everything cooked has been eaten.</strong>`;
     }
 
     host.innerHTML = Array.from({length:days}, (_,d)=>{
@@ -12007,7 +12986,7 @@
           ? `<strong style="color:${dishColor(ref)}">${left}</strong> of ${cooked} ${servingWord(cooked)} left`
           : `${cooked === 1 ? 'This serving is' : `All ${cooked} servings are`} eaten`}</div>` : ''}
         ${rows || '<div class="fav-nores">Nothing planned for this sitting.</div>'}
-        ${season.length ? `<div class="season-hint"><svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> Season with: <strong style="color:var(--amber)">${season.map(escapeHtml).join(' · ')}</strong></div>` : ''}
+        ${season.length ? `<div class="season-hint"><svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> Season with: <strong class="n-amber">${season.map(escapeHtml).join(' · ')}</strong></div>` : ''}
         ${sel.notes ? `<div class="season-hint"><svg class="px" aria-hidden="true"><use href="#i-note"></use></svg> ${escapeHtml(sel.notes)}</div>` : ''}
         ${ateOut ? `<div class="pd-ateout"><svg class="px" aria-hidden="true"><use href="#i-burger"></use></svg> You ate out for this one — the serving is still in the fridge.</div>
           <button class="mini-btn add" data-pd-unout="${meal.key}"><svg class="px" aria-hidden="true"><use href="#i-undo"></use></svg> NO, I ATE THE PREP</button>`
@@ -12180,7 +13159,7 @@
         <i data-level="1"></i><i data-level="2"></i><i data-level="3"></i>
         <span>light &rarr; on target</span></span>`;
     document.getElementById('calNote').innerHTML = logged
-      ? `<strong style="color:var(--green)">${logged}</strong> day${logged>1?'s':''} logged in this ${mode}. The bar under each day shows how close it came to your target. ${legend}`
+      ? `<strong class="n-green">${logged}</strong> day${logged>1?'s':''} logged in this ${mode}. The bar under each day shows how close it came to your target. ${legend}`
       : `Nothing logged in this ${mode} yet. Days you log in the Journal fill in here. ${legend}`;
 
     renderCalDay();
@@ -12609,7 +13588,7 @@
       renderTargetPair();
       return;
     }
-    exerciseNote.innerHTML = `${raw} kcal burned → training days add <strong style="color:var(--green)">+${credited}</strong> ` +
+    exerciseNote.innerHTML = `${raw} kcal burned → training days add <strong class="n-green">+${credited}</strong> ` +
       `(${pct}% for ${GOAL_LABEL[state.goal].split(' (')[0]} — ${CREDIT_NOTE[state.goal]}).`;
     exerciseNote.style.color = "var(--muted)";
     renderTargetPair();
@@ -12630,7 +13609,7 @@
     }
     targetPairPreview.innerHTML = `<div class="season-hint" style="margin-top:12px; line-height:1.8;">
       <svg class="px" aria-hidden="true"><use href="#i-sleep"></use></svg> Rest days — <strong style="color:var(--cyan)">${rest} kcal</strong><br>
-      <svg class="px" aria-hidden="true"><use href="#i-lift"></use></svg> Training days — <strong style="color:var(--green)">${train} kcal</strong><br>
+      <svg class="px" aria-hidden="true"><use href="#i-lift"></use></svg> Training days — <strong class="n-green">${train} kcal</strong><br>
       <span style="opacity:.8">Both go on your character sheet. You'll say how many of each you're
       prepping for when you build the meal prep.</span></div>`;
   }
@@ -12722,8 +13701,8 @@
     const base = `Daily burn before training: <strong style="color:var(--cyan)">${tdee}</strong> · ${GOAL_LABEL[state.goal]}`;
     return train > rest
       ? `${base} → <strong style="color:var(--cyan)">${rest}</strong> resting, ` +
-        `<strong style="color:var(--green)">${train} kcal</strong> training`
-      : `${base} → <strong style="color:var(--green)">${rest} kcal</strong>`;
+        `<strong class="n-green">${train} kcal</strong> training`
+      : `${base} → <strong class="n-green">${rest} kcal</strong>`;
   }
 
   btnRecommend.addEventListener('click', ()=>{
@@ -13571,7 +14550,7 @@
       return;
     }
     if (state.discoveryMode === 'favorites'){
-      discoveryNote.innerHTML = `Meals will be built from your <strong style="color:var(--green)">${n} favorite${n>1?'s':''}</strong>.`;
+      discoveryNote.innerHTML = `Meals will be built from your <strong class="n-green">${n} favorite${n>1?'s':''}</strong>.`;
       discoveryNote.style.color = "var(--muted)";
       return;
     }
@@ -14482,7 +15461,7 @@
     const days = state.prepServings || 1;
     prepDaysNote.innerHTML = days === 1
       ? 'Planning a single day. Shopping quantities will match one day of food.'
-      : `Cooking for <strong style="color:var(--green)">${days} days</strong>. Every one of them gets built and totalled — dishes rotate, so day 4 isn't just day 1 again.`;
+      : `Cooking for <strong class="n-green">${days} days</strong>. Every one of them gets built and totalled — dishes rotate, so day 4 isn't just day 1 again.`;
 
     renderDayMix(days);
 
@@ -14541,7 +15520,7 @@
     }));
     const totalMainServings = mains2 * days;
     uniqueNote.innerHTML =
-      `<strong style="color:var(--green)">${u}</strong> different ${u===1?'dish':'dishes'} covering ` +
+      `<strong class="n-green">${u}</strong> different ${u===1?'dish':'dishes'} covering ` +
       `<strong>${totalMainServings}</strong> main sitting${totalMainServings>1?'s':''} ` +
       (days>1 ? `across ${days} days. ` : `today. `) +
       (u >= totalMainServings
@@ -14569,7 +15548,7 @@
         renderStyle();
       }));
       snackNote.innerHTML =
-        `<strong style="color:var(--green)">${su}</strong> different snack${su>1?'s':''} covering ` +
+        `<strong class="n-green">${su}</strong> different snack${su>1?'s':''} covering ` +
         `<strong>${capSnacks}</strong> snack slot${capSnacks>1?'s':''}` +
         (days>1 ? ` across ${days} days.` : ' today.') +
         ' These don\'t come out of your meal count.';
@@ -16266,7 +17245,7 @@
     if (favCount){
       modeLine = state.discoveryMode === 'new'
         ? `<strong style="color:var(--cyan)">Try Something New:</strong> these are foods you didn't pick, chosen for eating like the ones you did. `
-        : `<strong style="color:var(--green)">Your Favorites:</strong> built from the foods you starred. `;
+        : `<strong class="n-green">Your Favorites:</strong> built from the foods you starred. `;
     }
 
     const usage = prepDishUsage();
@@ -16276,15 +17255,15 @@
 
     suggestIntro.innerHTML = modeLine + `${STYLE_BLURB[state.eatingStyle] || ''} ` +
       (bits.length ? `Built around ${bits.join(" and ")}. ` : '') +
-      `Here is <strong style="color:var(--green)">everything you'd be cooking</strong> — ` +
+      `Here is <strong class="n-green">everything you'd be cooking</strong> — ` +
       `${nM} meal${nM===1?'':'s'}${nS ? ` and ${nS} snack${nS===1?'':'s'}` : ''}` +
       (totalDays > 1 ? `, on rotation across ${totalDays} days` : '') +
-      `. Portions are per serving, weighed <strong style="color:var(--amber)">raw or dry</strong>` +
+      `. Portions are per serving, weighed <strong class="n-amber">raw or dry</strong>` +
       (hasSplit() && trainingDayCount() && trainingDayCount() < prepDayCount()
         ? `, and shown here at the day each dish first appears — the same dish is served bigger on a
-           <strong style="color:var(--green)">training day</strong> (${targetsFor('train').kcal} kcal)
+           <strong class="n-green">training day</strong> (${targetsFor('train').kcal} kcal)
            than on a <strong style="color:var(--cyan)">rest day</strong> (${targetsFor('rest').kcal} kcal).`
-        : `, sized to your <strong style="color:var(--green)">${tg.kcal} kcal</strong> target.`);
+        : `, sized to your <strong class="n-green">${tg.kcal} kcal</strong> target.`);
 
     suggestList.innerHTML = "";
 
@@ -17426,7 +18405,7 @@
     if (banner){
       banner.style.display = spent.kcal > 0 ? '' : 'none';
       banner.innerHTML = spent.kcal > 0
-        ? `Logged: <strong style="color:var(--amber)">${Math.round(spent.kcal)} kcal</strong> · Left to plan: <strong style="color:var(--green)">${Math.max(Math.round(tg.kcal - spent.kcal),0)} kcal</strong> across ${MEALS.filter(m=>mealParticipates(m.key)).length} of ${MEALS.length} sittings`
+        ? `Logged: <strong class="n-amber">${Math.round(spent.kcal)} kcal</strong> · Left to plan: <strong class="n-green">${Math.max(Math.round(tg.kcal - spent.kcal),0)} kcal</strong> across ${MEALS.filter(m=>mealParticipates(m.key)).length} of ${MEALS.length} sittings`
         : '';
     }
     updateHUD();
@@ -17437,7 +18416,7 @@
   function seasonHint(mealKey){
     const list = (state.selections[mealKey] || {}).season || [];
     if (!list.length) return '';
-    return `<div class="season-hint"><svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> Season with: <strong style="color:var(--amber)">${
+    return `<div class="season-hint"><svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> Season with: <strong class="n-amber">${
       list.map(escapeHtml).join(' · ')}</strong> — to taste, not weighed.</div>`;
   }
 
@@ -17490,7 +18469,7 @@
 
     const produceNote = document.getElementById('produceNote');
     if (produceNote){
-      produceNote.innerHTML = `Tier ${tier.id} — ${tier.name}. <strong style="color:var(--amber)">All weights are raw or dry</strong> — meat before cooking, grains and beans before water. Veg, fruit and sauce are sides sized by calories, so they never become your carb or fat source.`;
+      produceNote.innerHTML = `Tier ${tier.id} — ${tier.name}. <strong class="n-amber">All weights are raw or dry</strong> — meat before cooking, grains and beans before water. Veg, fruit and sauce are sides sized by calories, so they never become your carb or fat source.`;
     }
 
     MEALS.forEach((meal, mealIdx)=>{
@@ -17963,7 +18942,7 @@
       <div class="panel">
         <div style="font-family:var(--font-body); font-size:15px; margin-bottom:6px;">${escapeHtml(food.name)}</div>
         <div class="ctn-count" style="margin-bottom:12px;">This prep needs
-          <strong style="color:var(--green)">${needGrams.toFixed(0)}g</strong>${ul ? ' · ' + ul : ''}.</div>
+          <strong class="n-green">${needGrams.toFixed(0)}g</strong>${ul ? ' · ' + ul : ''}.</div>
         <label class="field-label">HOW MUCH DO YOU ALREADY HAVE? (GRAMS)</label>
         <input type="number" id="pantryInput" inputmode="numeric" min="0" max="100000"
           value="${have || ''}" placeholder="0">
@@ -18010,7 +18989,7 @@
           aria-label="Remove ${escapeHtml(it.food.name)} from the pantry"><svg class="px" aria-hidden="true"><use href="#i-close"></use></svg></button>
       </div>`).join('')}
       ${cup.length ? `<div class="season-hint" style="margin-top:10px;">
-        <svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> In the cupboard: <strong style="color:var(--amber)">${cup.map(escapeHtml).join(' · ')}</strong>
+        <svg class="px" aria-hidden="true"><use href="#i-season"></use></svg> In the cupboard: <strong class="n-amber">${cup.map(escapeHtml).join(' · ')}</strong>
       </div>` : ''}
       ${items.length ? `<button class="mini-btn add" id="pantryCooked"><svg class="px" aria-hidden="true"><use href="#i-egg"></use></svg> I'VE COOKED THIS PREP — TAKE IT OUT OF THE PANTRY</button>` : ''}
       <div class="season-hint" style="margin-top:10px;">
@@ -18046,7 +19025,7 @@
         : trainingDayCount();
       prepNote.innerHTML = days === 1
         ? 'Quantities are for a single day.'
-        : `Totalled across all <strong style="color:var(--green)">${days}</strong> prepped days, dish by dish` +
+        : `Totalled across all <strong class="n-green">${days}</strong> prepped days, dish by dish` +
           (hasSplit() && nTrain ? ` (${nTrain} training, ${days - nTrain} rest)` : '') + '.';
     }
 
@@ -18176,7 +19155,7 @@
       const n = state.prep.schedule.length;
       prepGrid.innerHTML = `<div style="grid-column:1/-1;">
         <div class="season-hint" style="margin:0;">
-          Totalled for the <strong style="color:var(--green)">${n} day${n===1?'':'s'}</strong>
+          Totalled for the <strong class="n-green">${n} day${n===1?'':'s'}</strong>
           in your prep. To cook for more or fewer days, change it in the Loadout and rebuild.
         </div></div>`;
       return;
@@ -18229,6 +19208,7 @@
   document.getElementById('btnPrintList').addEventListener('click', ()=> window.print());
 
   document.getElementById('btnStart').addEventListener('click', ()=> showScreen('screen-library'));
+  document.getElementById('btnSelect').addEventListener('click', ()=> showScreen('screen-library'));
   document.getElementById('attractContinue').addEventListener('click', ()=>{
     renderTiers(); renderEatenPanel(); renderMealTimeline(); refreshTargets();
     showScreen('screen-loadout');
@@ -18238,6 +19218,38 @@
   window.__T = { applyTheme, showScreen, goTab, renderTiers, renderLibrary,
                  renderEatenPanel, renderMealTimeline, refreshTargets,
                  get state(){ return state; } };
+
+  /* ---- material overlay layers ------------------------------------------
+     Every .panel gets the same two layers the calendar has, because that is
+     where the materials put anything drawn over the content. Panels built by
+     JS are caught by the observer rather than by hunting down render sites.
+     -------------------------------------------------------------------- */
+  function dressPanels(root){
+    const nodes = (root || document).querySelectorAll('.panel:not([data-fx])');
+    for (const el of nodes){
+      el.dataset.fx = '1';
+      /* the calendar already carries its pair in the markup */
+      if (el.querySelector(':scope > .paper-fx')) continue;
+      const fx = document.createElement('div');
+      fx.className = 'paper-fx'; fx.setAttribute('aria-hidden', 'true');
+      const ed = document.createElement('div');
+      ed.className = 'paper-edge'; ed.setAttribute('aria-hidden', 'true');
+      el.appendChild(fx); el.appendChild(ed);
+    }
+  }
+  let __fxPending = 0;
+  function __scheduleDress(){
+    cancelAnimationFrame(__fxPending);
+    __fxPending = requestAnimationFrame(function(){ dressPanels(); });
+  }
+  if (typeof MutationObserver !== 'undefined'){
+    new MutationObserver(function(muts){
+      for (let i = 0; i < muts.length; i++){
+        if (muts[i].addedNodes.length){ __scheduleDress(); return; }
+      }
+    }).observe(document.body, { childList:true, subtree:true });
+  }
+  dressPanels();
 
   /* init */
   const hadSave = loadState();
